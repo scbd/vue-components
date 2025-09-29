@@ -1,0 +1,15 @@
+// If you want to override variables do it here
+@use "variables" as *;
+
+// CoreUI variables, mixins, and core
+@use "@coreui/coreui/scss/variables" as *;
+@use "@coreui/coreui/scss/mixins" as *;
+@use "@coreui/coreui/scss/coreui" as *;
+
+// Vendors
+
+// Custom styles for this theme
+// @use "theme";
+
+// If you want to add custom CSS you can put it here
+  @use "custom";

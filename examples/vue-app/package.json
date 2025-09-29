@@ -1,0 +1,31 @@
+{
+  "name": "vite-vue-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "clean": "rm -rf ./node_modules",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@coreui/coreui": "^5.2.0",
+    "@coreui/icons": "^3.0.1",
+    "@coreui/icons-vue": "^2.2.0",
+    "@coreui/utils": "^2.0.2",
+    "@coreui/vue": "^5.4.1",
+    "@scbd/vue-components": "file:../..",
+    "vue": "^3.5.21",
+    "vue-tsc": "^3.0.7"
+  },
+  "devDependencies": {
+    "@popperjs/core": "^2.11.8",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/tsconfig": "^0.8.1",
+    "sass-embedded": "^1.93.2",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.7",
+    "vue-tsc": "^3.0.7"
+  }
+}

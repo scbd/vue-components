@@ -1,0 +1,59 @@
+{
+  "name": "@scbd/vue-components",
+  "private": false,
+  "version": "0.0.1",
+  "type": "module",
+  "files": [
+    "dist",
+    "dist-types",
+    "README.md",
+    "LICENSE"
+  ],
+  "module": "./dist/index.es.js",
+  "types": "./dist-types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist-types/index.d.ts",
+      "import": "./dist/index.es.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build:types": "vue-tsc -p tsconfig.json",
+    "build": "vite build && vue-tsc -p tsconfig.json",
+    "prepare": "vite build && vue-tsc -p tsconfig.json",
+    "prepack": "vite build && vue-tsc -p tsconfig.json",
+    "clean": "rm -rf ./dist ./dist-types"
+  },
+  "peerDependencies": {
+    "@coreui/coreui": "^5.2.0",
+    "@coreui/icons": "^3.0.1",
+    "@coreui/icons-vue": "^2.2.0",
+    "@coreui/utils": "^2.0.2",
+    "@coreui/vue": "^5.4.1",
+    "vue": "^3.4.21"
+  },
+  "devDependencies": {
+    "@coreui/coreui": "^5.2.0",
+    "@coreui/icons": "^3.0.1",
+    "@coreui/icons-vue": "^2.2.0",
+    "@coreui/utils": "^2.0.2",
+    "@coreui/vue": "^5.4.1",
+    "@types/luxon": "^3.7.1",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "sass-embedded": "^1.93.2",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vue": "^3.4.21",
+    "vue-tsc": "^2.0.6"
+  },
+  "dependencies": {
+    "-": "^0.0.1",
+    "luxon": "^3.7.2",
+    "tzdata": "^1.0.46"
+  }
+}
