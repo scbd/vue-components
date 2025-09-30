@@ -2,13 +2,13 @@
   <CFormInput
     v-model.trim="localDatetime as string"
     type="datetime-local"
-    :label="label ? showTimezone ? `${label} (${timezone})` : label : ''"
+    :label="computedLabel"
     :min="localMinDatetime"
     :max="localMaxDatetime"
     placeholder="Select date and time"
     :disabled="disabled"
-    :valid="valid === true || localDatetimeValid === true"
-    :invalid="invalid === true || localDatetimeValid === false"
+    :valid="computedValid"
+    :invalid="computedInvalid"
     :feedback-valid="feedbackValid"
     :feedback-invalid="feedbackInvalid || validationError"
   />
@@ -82,13 +82,14 @@ const validationError = computed(() => {
   }
 });
 
-const localDatetimeValid = computed(() => !!validationError.value
-  ? false
-  : props.required && !!localDatetime.value
-    ? true
-    : null);
+const localDatetimeValid = computed(() => {
+  if (!!validationError.value) return false;
+  if (props.required && !!localDatetime.value) return true;
+  
+  return null;
+});
 
-const toLocalDatetime = (value?: string | null) => {
+const toLocalDatetime = (value?: string | null): string | null => {
   if (!value) return null
 
   if (!model.value?.match(datetimeRegex)) return null;
@@ -96,7 +97,13 @@ const toLocalDatetime = (value?: string | null) => {
   return DateTime.fromISO(value, { zone: props.timezone }).toFormat(Format);
 }
 
-const toUtcDatetime = (value?: string | null) => value
+const computedValid = computed(() => props.valid === true || localDatetimeValid.value === true);
+
+const computedInvalid = computed(() => props.invalid === true || localDatetimeValid.value === false);
+
+const computedLabel = computed(() => props.label ? props.showTimezone ? `${props.label} (${props.timezone})` : props.label : '');
+
+const toUtcDatetime = (value?: string | null): string | null => value
   ? DateTime.fromISO(value, { zone: props.timezone })
     .setZone("utc")
     .toISO()

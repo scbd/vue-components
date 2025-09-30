@@ -16,7 +16,7 @@
               v-if="multiple"
               :id="id ? `${id}-${lang.locale}` : undefined"
               :dir="lang.direction"
-              :placeholder="lang.name"
+              :placeholder="placeholders && placeholders[lang.locale] || lang.name"
               :rows="rows"
               :modelValue="computedModel[lang.locale]"
               @update:modelValue="modelUpdated(lang.locale, $event)"
@@ -27,7 +27,7 @@
               v-else
               :id="id ? `${id}-${lang.locale}` : undefined"
               :dir="lang.direction"
-              :placeholder="lang.name"
+              :placeholder="placeholders && placeholders[lang.locale] || lang.name"
               :modelValue="computedModel[lang.locale]"
               @update:modelValue="modelUpdated(lang.locale, $event)"
               :valid="valid && valid[lang.locale] === true"
@@ -77,6 +77,7 @@ const props = withDefaults(defineProps<{
   valid?: { [locale: string]: boolean },
   feedbackInvalid?: string,
   languages?: Language[],
+  placeholders?: LString,
 }>(), {
   rows: 2,
   // @ts-ignore why?

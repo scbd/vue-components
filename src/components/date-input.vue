@@ -7,8 +7,8 @@
     :min="localMin"
     :max="localMax"
     :disabled="disabled"
-    :valid="valid === true || localDateValid === true"
-    :invalid="invalid === true || localDateValid === false"
+    :valid="computedValid"
+    :invalid="computedInvalid"
     :feedback-valid="feedbackValid"
     :feedback-invalid="feedbackInvalid || validationError"
   />
@@ -79,11 +79,16 @@ const validationError = computed(() => {
   }
 });
 
-const localDateValid = computed(() => !!validationError.value
-  ? false
-  : props.required && !!localDate.value
-    ? true
-    : null);
+const localDateValid = computed(() => {
+  if (!!validationError.value) return false;
+  if (props.required && !!localDate.value) return true;
+  
+  return null;
+});
+
+const computedValid = computed(() => props.valid === true || localDateValid.value === true);
+
+const computedInvalid = computed(() => props.invalid === true || localDateValid.value === false);
 
 const toLocalDate = (value?: string | null) => {
   if (!value) return null
@@ -95,7 +100,7 @@ const toLocalDate = (value?: string | null) => {
   return DateTime.fromISO(value, { zone: props.timezone || "utc" }).toISODate();
 }
 
-const toUtcDate = (value?: string | null) => {
+const toUtcDate = (value?: string | null): string | null => {
   if (value) {
     let date = DateTime.fromISO(value, { zone: props.timezone || "utc" });
     date = props.adjustTime == "endOfDay"

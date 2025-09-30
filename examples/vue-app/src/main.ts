@@ -5,7 +5,7 @@ import { createApp } from 'vue'
 import './style.css'
 import './assets/scss/style.scss';
 import '@scbd/vue-components/style.css';
-import App from './App.vue'
+import App from './app.vue'
 
 createApp(App)
   .provide('icons', icons)
