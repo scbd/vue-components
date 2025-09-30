@@ -24,10 +24,6 @@ const timezone = "America/Montreal";
   >
     <h1 class="bar">Example Vue App</h1>
 
-    <h2>Example Button</h2>
-    <ExampleButton msg="Allo" />
-    <ExampleButton msg="Hello" />
-
     <h2>Multi Language Input</h2>
     <MultiLanguageInput
       label="Multi Language Input"

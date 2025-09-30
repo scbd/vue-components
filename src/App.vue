@@ -4,7 +4,6 @@
   lang="ts"
 >
 import { ref } from 'vue'
-import ExampleButton from './components/example-button.vue'
 import MultiLanguageInput from './components/multi-language-input.vue'
 import DateInput from './components/date-input.vue'
 import DateRangeInput from './components/date-range-input.vue'
