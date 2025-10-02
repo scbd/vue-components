@@ -7,8 +7,8 @@
     :max="localMaxDatetime"
     placeholder="Select date and time"
     :disabled="disabled"
-    :valid="computedValid"
-    :invalid="computedInvalid"
+    :valid="isValid"
+    :invalid="isInvalid"
     :feedback-valid="feedbackValid"
     :feedback-invalid="feedbackInvalid || validationError"
   />
@@ -97,9 +97,9 @@ const toLocalDatetime = (value?: string | null): string | null => {
   return DateTime.fromISO(value, { zone: props.timezone }).toFormat(Format);
 }
 
-const computedValid = computed(() => props.valid === true || localDatetimeValid.value === true);
+const isValid = computed(() => props.valid === true || localDatetimeValid.value === true);
 
-const computedInvalid = computed(() => props.invalid === true || localDatetimeValid.value === false);
+const isInvalid = computed(() => props.invalid === true || localDatetimeValid.value === false);
 
 const computedLabel = computed(() => props.label ? props.showTimezone ? `${props.label} (${props.timezone})` : props.label : '');
 

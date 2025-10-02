@@ -7,8 +7,8 @@
     :min="localMin"
     :max="localMax"
     :disabled="disabled"
-    :valid="computedValid"
-    :invalid="computedInvalid"
+    :valid="isValid"
+    :invalid="isInvalid"
     :feedback-valid="feedbackValid"
     :feedback-invalid="feedbackInvalid || validationError"
   />
@@ -86,16 +86,16 @@ const localDateValid = computed(() => {
   return null;
 });
 
-const computedValid = computed(() => props.valid === true || localDateValid.value === true);
+const isValid = computed(() => props.valid === true || localDateValid.value === true);
 
-const computedInvalid = computed(() => props.invalid === true || localDateValid.value === false);
+const isInvalid = computed(() => props.invalid === true || localDateValid.value === false);
 
 const toLocalDate = (value?: string | null) => {
   if (!value) return null
 
-  if (hasTimezone.value && !model.value?.match(datetimeRegex)) return null;
+  if (hasTimezone.value && !value?.match(datetimeRegex)) return null;
 
-  if (!hasTimezone.value && model.value?.match(datetimeRegex)) return null;
+  if (!hasTimezone.value && value?.match(datetimeRegex)) return null;
 
   return DateTime.fromISO(value, { zone: props.timezone || "utc" }).toISODate();
 }

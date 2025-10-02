@@ -8,5 +8,4 @@ type LString = {
     [locale in Locale]?: string
 }
 
-// @ts-ignore
-export default LString;
+export type { LString as default }
