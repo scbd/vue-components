@@ -1,4 +1,3 @@
-// TODO import from to scbd/vue-components when finished code review
 import { Locales } from "../data/un-languages";
 import type { Locale } from "../types/lstring";
 import type LString from "../types/lstring";
