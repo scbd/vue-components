@@ -22,4 +22,4 @@ export const Languages: Language[] = [
     Chinese
 ];
 
-export const Locales: Array<string> = Languages.map(({ locale }) => locale);
+export const Locales: Array<Locale> = Languages.map(({ locale }) => locale);
