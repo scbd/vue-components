@@ -9,6 +9,7 @@
           :required="required"
           :disabled="disabled"
           :max="endDate"
+          :placeholder="placeholder"
         />
       </div>
       <div class="col-6">
@@ -20,6 +21,7 @@
           :required="required"
           :disabled="disabled"
           :min="startDate"
+          :placeholder="placeholder"
         />
       </div>
     </div>
@@ -38,6 +40,7 @@ const props = defineProps<{
   required?: boolean,
   disabled?: boolean,
   showTimezone?: boolean,
+  placeholder?: string,
 }>();
 
 const startDate = defineModel<string | undefined>('startDate', { required: true });

@@ -5,7 +5,7 @@
     :label="computedLabel"
     :min="localMinDatetime"
     :max="localMaxDatetime"
-    placeholder="Select date and time"
+    :placeholder="placeholder"
     :disabled="disabled"
     :valid="isValid"
     :invalid="isInvalid"
@@ -27,7 +27,7 @@ import { DateTime } from 'luxon';
 import tzdata from 'tzdata';
 import { computed } from 'vue';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   label?: string,
   min?: string,
   max?: string,
@@ -39,7 +39,10 @@ const props = defineProps<{
   invalid?: boolean,
   feedbackValid?: string,
   feedbackInvalid?: string,
-}>();
+  placeholder?: string,
+}>(), {
+  placeholder: "Select date and time"
+});
 
 const model = defineModel<string | null | undefined>({ required: true });
 

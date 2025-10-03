@@ -3,7 +3,7 @@
     v-model.trim="localDate as string"
     :label="label"
     type="date"
-    placeholder="Select date"
+    :placeholder="placeholder"
     :min="localMin"
     :max="localMax"
     :disabled="disabled"
@@ -36,8 +36,10 @@ const props = withDefaults(defineProps<{
   invalid?: boolean,
   feedbackValid?: string,
   feedbackInvalid?: string,
+  placeholder?: string,
 }>(), {
   adjustTime: "startOfDay",
+  placeholder: "Select date",
 });
 
 const model = defineModel<string | null | undefined>({ required: true });
