@@ -2,8 +2,8 @@
   setup
   lang="ts"
 >
-import { ref } from 'vue'
-import { lstring } from '@scbd/vue-components'
+import { ref } from 'vue';
+import { lstring } from '@scbd/vue-components';
 
 const langValues = ref({
   en: 'English value',
