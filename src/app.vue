@@ -10,6 +10,7 @@ import DateRangeInput from './components/date-range-input.vue'
 import DatetimeInput from './components/datetime-input.vue'
 import DatetimeRangeInput from './components/datetime-range-input.vue'
 import type { Language } from './data/un-languages'
+import lstring from './utils/lstring'
 
 const langValues = ref({
   en: 'English value',
@@ -74,6 +75,11 @@ const nullRef = ref();
       :languages="customLangs"
       :placeholders="customLangPlaceholders"
     />
+
+    <h2>Multi Language Function</h2>
+    <div class="d-flex gap-2 align-items-center">
+      <code>lstring(langValues):</code> {{ lstring(langValues) }}
+    </div>
 
     <h2>Date Inputs</h2>
     <DateInput
