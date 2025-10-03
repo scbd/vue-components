@@ -1,7 +1,7 @@
 import { CIcon } from '@coreui/icons-vue';
 import * as icons from '@coreui/icons';
 import { createApp } from 'vue'
-import App from './app.vue'
+import App from './the-app.vue'
 import '@coreui/coreui/dist/css/coreui.min.css'
 
 createApp(App)
