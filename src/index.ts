@@ -15,10 +15,7 @@ export {
   DateRangeInput,
   DatetimeInput,
   DatetimeRangeInput,
-}
-
-export type { Language } from './data/un-languages'
-export type { default as LString } from './types/lstring';
+};
 
 // Vue plugin (global registration)
 export default {
@@ -31,3 +28,10 @@ export default {
     app.component('DatetimeRangeInput', DatetimeRangeInput);
   },
 };
+
+// utils and other functions
+export { default as lstring } from './utils/lstring';
+
+// types
+export type { Language } from './data/un-languages';
+export type { default as LString } from './types/lstring';

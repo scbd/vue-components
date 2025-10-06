@@ -2,12 +2,13 @@
   setup
   lang="ts"
 >
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { lstring } from '@scbd/vue-components';
 
 const langValues = ref({
   en: 'English value',
   fr: 'La valeure française'
-})
+});
 const customLangValues = ref({
   en: "We are Klingons!",
   kl: "tlhIngan maH!",
@@ -45,6 +46,11 @@ const timezone = "America/Montreal";
         { locale: 'kl', name: 'Klingon', direction: 'ltr' },
       ]"
     />
+
+    <h2>Multi Language Function</h2>
+    <div class="d-flex gap-2 align-items-center">
+      <code>lstring(langValues):</code> {{ lstring(langValues) }}
+    </div>
 
     <h2>Date Inputs</h2>
     <DateInput

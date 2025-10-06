@@ -3,18 +3,19 @@
   setup
   lang="ts"
 >
-import { ref } from 'vue'
-import MultiLanguageInput from './components/multi-language-input.vue'
-import DateInput from './components/date-input.vue'
-import DateRangeInput from './components/date-range-input.vue'
-import DatetimeInput from './components/datetime-input.vue'
-import DatetimeRangeInput from './components/datetime-range-input.vue'
-import type { Language } from './data/un-languages'
+import { ref } from 'vue';
+import MultiLanguageInput from './components/multi-language-input.vue';
+import DateInput from './components/date-input.vue';
+import DateRangeInput from './components/date-range-input.vue';
+import DatetimeInput from './components/datetime-input.vue';
+import DatetimeRangeInput from './components/datetime-range-input.vue';
+import type { Language } from './data/un-languages';
+import lstring from './utils/lstring';
 
 const langValues = ref({
   en: 'English value',
   fr: 'La valeure française'
-})
+});
 
 const customLangs = [
   { locale: "en", name: "English", direction: "ltr" },
@@ -30,8 +31,6 @@ const customLangPlaceholders = ref({
   en: "English now!",
   kl: "DaH tlhIngan Hol!",
 });
-
-
 
 const date = ref('2000-01-01');
 const datetime = ref(new Date().toISOString());
@@ -74,6 +73,11 @@ const nullRef = ref();
       :languages="customLangs"
       :placeholders="customLangPlaceholders"
     />
+
+    <h2>Multi Language Function</h2>
+    <div class="d-flex gap-2 align-items-center">
+      <code>lstring(langValues):</code> {{ lstring(langValues) }}
+    </div>
 
     <h2>Date Inputs</h2>
     <DateInput
