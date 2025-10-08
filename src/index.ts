@@ -31,6 +31,7 @@ export default {
 
 // utils and other functions
 export { default as lstring } from './utils/lstring';
+export { Languages } from './data/un-languages';
 
 // types
 export type { Language } from './data/un-languages';
