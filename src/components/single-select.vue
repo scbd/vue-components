@@ -33,7 +33,7 @@
   setup
   lang="ts"
 >
-import { FormInputWrapper } from '@scbd/vue-components'
+import FormInputWrapper from './form-input-wrapper.vue'
 import { computed } from 'vue';
 import Multiselect from 'vue-multiselect';
 import { v4 as uuidv4 } from 'uuid';
