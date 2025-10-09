@@ -43,6 +43,7 @@
     "@coreui/icons-vue": "^2.2.0",
     "@coreui/utils": "^2.0.2",
     "@coreui/vue": "^5.4.1",
+    "@types/lodash": "^4.17.20",
     "@types/luxon": "^3.7.1",
     "@vitejs/plugin-vue": "^5.0.4",
     "sass-embedded": "^1.93.2",
@@ -52,7 +53,10 @@
     "vue-tsc": "^2.0.6"
   },
   "dependencies": {
+    "lodash": "^4.17.21",
     "luxon": "^3.7.2",
-    "tzdata": "^1.0.46"
+    "tzdata": "^1.0.46",
+    "uuid": "^13.0.0",
+    "vue-multiselect": "^3.4.0"
   }
 }

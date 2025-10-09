@@ -5,6 +5,15 @@
 import { ref } from 'vue';
 import { lstring } from '@scbd/vue-components';
 
+const options = [
+  { label: "FOO!", value: 'foo' },
+  { label: "BAR!!", value: 'bar' },
+  { label: "CAR!!!", value: 'car' },
+];
+
+const selectedOption = ref();
+const selectedOptions = ref([]);
+
 const langValues = ref({
   en: 'English value',
   fr: 'La valeure française'
@@ -24,6 +33,22 @@ const timezone = "America/Montreal";
     style="width: fit-content; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; align-items: center; margin: auto"
   >
     <h1 class="bar">Example Vue App</h1>
+
+    <h2>Single and Multi Select</h2>
+    <div style="width: 15rem; display: flex; flex-direction: column; gap: 1rem;">
+      <SingleSelect
+        :options="options"
+        v-model="selectedOption"
+        placeholder="Select an foo!"
+        label="Single Select"
+      />
+      <MultiSelect
+        :options="options"
+        v-model="selectedOptions"
+        placeholder="Select many foos!"
+        label="Multi Select"
+      />
+    </div>
 
     <h2>Multi Language Input</h2>
     <MultiLanguageInput

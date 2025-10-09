@@ -4,13 +4,24 @@
   lang="ts"
 >
 import { ref } from 'vue';
-import MultiLanguageInput from './components/multi-language-input.vue';
 import DateInput from './components/date-input.vue';
 import DateRangeInput from './components/date-range-input.vue';
 import DatetimeInput from './components/datetime-input.vue';
 import DatetimeRangeInput from './components/datetime-range-input.vue';
+import MultiLanguageInput from './components/multi-language-input.vue';
+import MultiSelect from './components/multi-select.vue';
+import SingleSelect from './components/single-select.vue';
 import type { Language } from './data/un-languages';
 import lstring from './utils/lstring';
+
+const options = [
+  { label: "FOO!", value: 'foo' },
+  { label: "BAR!!", value: 'bar' },
+  { label: "CAR!!!", value: 'car' },
+];
+
+const selectedOption = ref();
+const selectedOptions = ref([]);
 
 const langValues = ref({
   en: 'English value',
@@ -43,6 +54,23 @@ const nullRef = ref();
     style="width: fit-content; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; align-items: center; margin: auto"
   >
     <h1>Playground for Dev'ing</h1>
+
+    <h2>Single and Multi Select</h2>
+
+    <div style="width: 15rem; display: flex; flex-direction: column; gap: 1rem;">
+      <SingleSelect
+        :options="options"
+        v-model="selectedOption"
+        placeholder="Select an foo!"
+        label="Single Select"
+      />
+      <MultiSelect
+        :options="options"
+        v-model="selectedOptions"
+        placeholder="Select many foos!"
+        label="Multi Select"
+      />
+    </div>
 
     <h2>Multi Language Input</h2>
     <MultiLanguageInput

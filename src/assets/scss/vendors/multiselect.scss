@@ -1,0 +1,69 @@
+@use 'vue-multiselect/dist/vue-multiselect.css';
+
+.multiselect__placeholder {
+  background: pink;
+  padding: 0 !important;
+  margin-top: -2px !important;
+  margin-bottom: 0px !important;
+  margin-left: 5px;
+  font-size: 16px;
+  color: var(--cui-secondary);
+}
+
+.multiselect__input::placeholder {
+  color: var(--cui-secondary);
+}
+
+.multiselect__tag {
+  margin-top: -1px !important;
+  margin-bottom: -1px !important;
+}
+
+.multiselect__clear {
+  cursor: pointer;
+  display: block;
+  height: 40px;
+  position: absolute;
+  right: 28px;
+  width: 20px;
+  z-index: 2;
+}
+
+.multiselect__clear:after {
+  color: #aaa;
+  content: "×";
+  display: block;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 32px;
+  position: absolute;
+  right: 0;
+  top: .125rem;
+}
+
+.multiselect__tags {
+  min-height: 38px !important;
+  padding-right: 48px !important;
+}
+
+.multiselect__select {
+  width: 32px !important;
+  height: 36px !important;
+  background: none !important;
+}
+
+.multiselect {
+  color: var(--cui-body-color);
+  min-height: none;
+  background: none !important;
+}
+.multiselect.multiselect--disabled .multiselect__select {
+  display: none;
+}
+
+.multiselect.multiselect--disabled,
+.multiselect.multiselect--disabled .multiselect__tags,
+.multiselect.multiselect--disabled .multiselect__single {
+  background: var(--cui-secondary-bg);
+  opacity: 1 !important;
+}
