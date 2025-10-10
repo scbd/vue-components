@@ -55,7 +55,8 @@ import FormInputWrapper from './form-input-wrapper.vue'
 import { v4 as uuidv4 } from 'uuid';
 import { computed } from 'vue';
 import Multiselect from 'vue-multiselect';
-import { asArray, sortBy } from '../utils/collections'
+import asArray from '../utils/as-array'
+import sortBy from 'lodash-es/sortBy'
 
 const props = withDefaults(defineProps<{
   id?: string,
@@ -73,22 +74,22 @@ const props = withDefaults(defineProps<{
 
 const model = defineModel<string | string[]>();
 
-const sortedOptions = computed(() => props.options.map((o, i) => ({ ...o, sort: i})));
+const sortedOptions = computed(() => props.options.map((o, i) => ({ ...o, sort: i })));
 
 const selectedOptions = computed({
   get() {
-    return asArray(model.value)
-      // TODO any
-      .map((value: any) => sortedOptions.value
+    return sortBy(
+      asArray(model.value).map((value: any) => sortedOptions.value
         .find((option: { label: string, value: string | number }) => option.value === value))
-      .filter(Boolean)
-      .sort(sortBy('sort', 'asc'));
+        .filter(Boolean),
+      ['sort']
+    )
   },
   set(values) {
-    model.value = asArray(values)
-      .sort(sortBy('sort', 'asc'))
-      // TODO any
-      .map((o: any) => o.value);    
+    model.value = sortBy(
+      asArray(values).map((o: any) => o.value),
+      ['sort']
+    )
   }
 });
 </script>

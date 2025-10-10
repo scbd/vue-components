@@ -37,6 +37,8 @@ export default {
 };
 
 // utils and other functions
+export { default as asArray } from './utils/as-array';
+export { default as asValue } from './utils/as-value';
 export { default as lstring } from './utils/lstring';
 export { Languages } from './data/un-languages';
 
