@@ -1,4 +1,14 @@
-// styles, variables, themes, etc here
+// Override scss variables
+@use "variables";
+
+// Import default variables and styles
+@use "@coreui/coreui/scss/coreui";
+
+// Override css variables
+@use "custom";
+
+// Custom styles
+@use "theme";
 
 // 3rd party
 @use "vendors/multiselect.scss";
