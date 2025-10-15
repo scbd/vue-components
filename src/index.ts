@@ -25,14 +25,14 @@ export {
 // Vue plugin (global registration)
 export default {
   install: (app: App) => {
-    app.component('DateInput', DateInput);
-    app.component('DateRangeInput', DateRangeInput);
-    app.component('DatetimeInput', DatetimeInput);
-    app.component('DatetimeRangeInput', DatetimeRangeInput);
-    app.component('FormInputWrapper', FormInputWrapper);
-    app.component('MultiLanguageInput', MultiLanguageInput);
-    app.component('MultiSelect', MultiSelect);
-    app.component('SingleSelect', SingleSelect);
+    app.component('ScbdDateInput', DateInput);
+    app.component('ScbdDateRangeInput', DateRangeInput);
+    app.component('ScbdDatetimeInput', DatetimeInput);
+    app.component('ScbdDatetimeRangeInput', DatetimeRangeInput);
+    app.component('ScbdFormInputWrapper', FormInputWrapper);
+    app.component('ScbdMultiLanguageInput', MultiLanguageInput);
+    app.component('ScbdMultiSelect', MultiSelect);
+    app.component('ScbdSingleSelect', SingleSelect);
   },
 };
 

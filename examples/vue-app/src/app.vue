@@ -51,19 +51,19 @@ const timezone = "America/Montreal";
     </div>
 
     <h2>Multi Language Input</h2>
-    <MultiLanguageInput
+    <ScbdMultiLanguageInput
       label="Multi Language Input"
       v-model="langValues"
     />
-    <MultiLanguageInput
+    <ScbdMultiLanguageInput
       label="Multi Language Input (valid)"
       :valid="{ en: true, fr: true }"
     />
-    <MultiLanguageInput
+    <ScbdMultiLanguageInput
       label="Multi Language Input (invalid)"
       :valid="{ en: false }"
     />
-    <MultiLanguageInput
+    <ScbdMultiLanguageInput
       label="Multi Language Input (custom languages)"
       v-model="customLangValues"
       :languages="[
@@ -78,21 +78,21 @@ const timezone = "America/Montreal";
     </div>
 
     <h2>Date Inputs</h2>
-    <DateInput
+    <ScbdDateInput
       label="Date"
       v-model="date"
-    ></DateInput>
-    <DateRangeInput
+    ></ScbdDateInput>
+    <ScbdDateRangeInput
       label="Date"
       v-model:start-date="date"
       v-model:end-date="date"
     />
-    <DatetimeInput
+    <ScbdDatetimeInput
       label="Datetime"
       v-model="datetime"
       :timezone="timezone"
     />
-    <DatetimeRangeInput
+    <ScbdDatetimeRangeInput
       label="Datetime"
       v-model:start-date="datetime"
       v-model:end-date="datetime"
