@@ -7,8 +7,11 @@ export default defineConfig({
   plugins: [vue()],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'), // Your library entry point
-      fileName: (format) => `index.${format}.js`,
+      entry: {
+        index: resolve(__dirname, 'src/index.ts'),
+        lstring: resolve(__dirname, 'src/utils/lstring.ts')
+      },
+      fileName: (format, name) => `${name}.${format}.js`,
       formats: ['es'], // Output formats
     },
     cssCodeSplit: false,

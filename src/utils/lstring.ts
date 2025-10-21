@@ -28,3 +28,11 @@ export default function (ltext: string | LString | { [locale: string]: string } 
 
   return text;
 }
+
+export function trim(ltext: LString) {
+  return Object.entries(ltext).reduce((ret, [k, v]) => ({ ...ret, [k]: v?.trim() }), {});
+}
+
+export function isEmpty(ltext?: LString) {
+  return !ltext || !Object.values(trim(ltext)).some(Boolean);
+}

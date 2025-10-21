@@ -16,6 +16,10 @@
       "types": "./dist-types/index.d.ts",
       "import": "./dist/index.es.js"
     },
+    "./lstring": {
+      "types": "./dist-types/utils/lstring.d.ts",
+      "import": "./dist/lstring.es.js"
+    },
     "./style.css": "./dist/style.css"
   },
   "sideEffects": [

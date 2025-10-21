@@ -12,7 +12,7 @@ import MultiLanguageInput from './components/multi-language-input.vue';
 import MultiSelect from './components/multi-select.vue';
 import SingleSelect from './components/single-select.vue';
 import type { Language } from './data/un-languages';
-import lstring from './utils/lstring';
+import lstring, { trim, isEmpty } from './utils/lstring';
 
 const options = [
   { label: "FOO!", value: 'foo' },
@@ -76,14 +76,38 @@ const nullRef = ref();
     <MultiLanguageInput
       label="Multi Language Input"
       v-model="langValues"
+      feedback-valid="Valid message (not shown)"
+      feedback-invalid="Invalid message (not shown)"
     />
     <MultiLanguageInput
       label="Multi Language Input (valid)"
+      :valid="true"
+      feedback-valid="All valid"
+    />
+    <MultiLanguageInput
+      label="Multi Language Input (some valid)"
       :valid="{ en: true, fr: true }"
+      feedback-valid="Some are valid"
+    />
+    <MultiLanguageInput
+      label="Multi Language Input (some valid not en)"
+      :valid="{ es: true, fr: true }"
+      feedback-valid="Some are valid"
     />
     <MultiLanguageInput
       label="Multi Language Input (invalid)"
-      :valid="{ en: false }"
+      :invalid="true"
+      feedback-invalid="All invalid"
+    />
+    <MultiLanguageInput
+      label="Multi Language Input (some invalid)"
+      :invalid="{ en: true, fr: true }"
+      feedback-invalid="Some are invalid"
+    />
+    <MultiLanguageInput
+      label="Multi Language Input (some invalid not en)"
+      :invalid="{ es: true, fr: true }"
+      feedback-invalid="Some are invalid"
     />
     <MultiLanguageInput
       label="Multi Language Input (custom langs)"
@@ -103,8 +127,15 @@ const nullRef = ref();
     />
 
     <h2>Multi Language Function</h2>
-    <div class="d-flex gap-2 align-items-center">
+    <div class="d-flex flex-column gap-2 align-items-center">
       <code>lstring(langValues):</code> {{ lstring(langValues) }}
+      <code>trim({ en: ' foo ', fr: 'bar', es: undefined, kl: '' }): </code> {{ trim({ en: ' foo ', fr: 'bar', es:
+      undefined, kl: '' }) }}
+      <code>isEmpty({ en: 'nope' }): </code> {{ isEmpty({ en: 'nope' }) }}
+      <code>isEmpty({ en: '', fr: 'non' }): </code> {{ isEmpty({ en: '', fr: 'non' }) }}
+      <code>isEmpty({ en: ' ' }): </code> {{ isEmpty({ en: ' ' }) }}
+      <code>isEmpty({}): </code> {{ isEmpty({}) }}
+      <code>isEmpty(): </code> {{ isEmpty() }}
     </div>
 
     <h2>Date Inputs</h2>
