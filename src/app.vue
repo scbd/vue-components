@@ -12,7 +12,7 @@ import MultiLanguageInput from './components/multi-language-input.vue';
 import MultiSelect from './components/multi-select.vue';
 import SingleSelect from './components/single-select.vue';
 import type { Language } from './data/un-languages';
-import lstring, { trim, isEmpty } from './utils/lstring';
+import lstring, { trim, isNullOrEmpty, isNullOrWhiteSpace } from './utils/lstring';
 
 const options = [
   { label: "FOO!", value: 'foo' },
@@ -131,11 +131,15 @@ const nullRef = ref();
       <code>lstring(langValues):</code> {{ lstring(langValues) }}
       <code>trim({ en: ' foo ', fr: 'bar', es: undefined, kl: '' }): </code> {{ trim({ en: ' foo ', fr: 'bar', es:
       undefined, kl: '' }) }}
-      <code>isEmpty({ en: 'nope' }): </code> {{ isEmpty({ en: 'nope' }) }}
-      <code>isEmpty({ en: '', fr: 'non' }): </code> {{ isEmpty({ en: '', fr: 'non' }) }}
-      <code>isEmpty({ en: ' ' }): </code> {{ isEmpty({ en: ' ' }) }}
-      <code>isEmpty({}): </code> {{ isEmpty({}) }}
-      <code>isEmpty(): </code> {{ isEmpty() }}
+      <code>isNullOrEmpty({ en: 'nope' }): </code> {{ isNullOrEmpty({ en: 'nope' }) }}
+      <code>isNullOrEmpty({ en: '', fr: 'non' }): </code> {{ isNullOrEmpty({ en: '', fr: 'non' }) }}
+      <code>isNullOrEmpty({ en: ' ' }): </code> {{ isNullOrEmpty({ en: ' ' }) }}
+      <code>isNullOrEmpty({}): </code> {{ isNullOrEmpty({}) }}
+      <code>isNullOrEmpty(): </code> {{ isNullOrEmpty() }}
+      <code>isNullOrWhiteSpace({}): </code> {{ isNullOrWhiteSpace({ en: '' }) }}
+      <code>isNullOrWhiteSpace({ en: '' }): </code> {{ isNullOrWhiteSpace({ en: '' }) }}
+      <code>isNullOrWhiteSpace({ en: ' ' }): </code> {{ isNullOrWhiteSpace({ en: ' ' }) }}
+      <code>isNullOrWhiteSpace({ en: 'nope' }): </code> {{ isNullOrWhiteSpace({ en: 'nope' }) }}
     </div>
 
     <h2>Date Inputs</h2>
