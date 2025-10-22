@@ -13,6 +13,7 @@ import MultiSelect from './components/multi-select.vue';
 import SingleSelect from './components/single-select.vue';
 import type { Language } from './data/un-languages';
 import lstring, { trim, isNullOrEmpty, isNullOrWhiteSpace } from './utils/lstring';
+import asArray from './utils/as-array';
 
 const options = [
   { label: "FOO!", value: 'foo' },
@@ -85,6 +86,23 @@ const nullRef = ref();
         </template>
         <template #clear>Y</template>
       </MultiSelect>
+      <MultiSelect
+        :options="options"
+        v-model="selectedOptions"
+        placeholder="Select many foos!"
+        label="Multi Select w/ customSelectedOptions (keep insertion order)"
+        :customSelectedOptions="{
+          // @ts-ignore
+          get(model, options) {
+            return asArray(model.value).map((value: any) => options
+              .find((option) => option.value === value))
+              .filter(Boolean)
+          },
+          set(model, options) { 
+            model.value = options.map((o: any) => o.value)
+          }
+        }"
+      />
     </div>
 
     <h2>Multi Language Input</h2>

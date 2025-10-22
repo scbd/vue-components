@@ -68,13 +68,17 @@
 import FormInputWrapper from './form-input-wrapper.vue'
 import { v4 as uuidv4 } from 'uuid';
 import { computed } from 'vue';
+import type { ModelRef } from 'vue';
 import Multiselect from 'vue-multiselect';
 import asArray from '../utils/as-array'
 import sortBy from 'lodash-es/sortBy'
 
+type Option = { label: string, value: string | number };
+type ModelValue = string | string[];
+
 const props = withDefaults(defineProps<{
   id?: string,
-  options: { label: string, value: string | number }[],
+  options: Option[],
   label?: string,
   disabled?: boolean,
   placeholder?: string,
@@ -82,28 +86,41 @@ const props = withDefaults(defineProps<{
   invalid?: boolean,
   feedbackValid?: string,
   feedbackInvalid?: string,
+  customSelectedOptions?: {
+    get: (model: ModelRef<ModelValue>, options: Option[]) => Option[],
+    set: (model: ModelRef<ModelValue>, options: Option[]) => void
+  }
 }>(), {
   id: uuidv4(),
+  customSelectedOptions: {
+    // @ts-ignore type check doesn't understand that .filter(Boolean) will remove all undefined options
+    get(model: ModelRef<ModelValue>, options: Option[]) {
+      return sortBy(
+        asArray(model.value).map((value: any) => options
+          .find((option: Option) => option.value === value))
+          .filter(Boolean),
+        ['sort']
+      )
+    },
+    set(model: ModelRef<ModelValue>, options: Option[]) {
+      model.value = sortBy(
+        asArray(options).map((o: any) => o.value),
+        ['sort']
+      )
+    }
+  }
 });
 
-const model = defineModel<string | string[]>();
+const model = defineModel<ModelValue>({ required: true});
 
 const sortedOptions = computed(() => props.options.map((o, i) => ({ ...o, sort: i })));
 
 const selectedOptions = computed({
   get() {
-    return sortBy(
-      asArray(model.value).map((value: any) => sortedOptions.value
-        .find((option: { label: string, value: string | number }) => option.value === value))
-        .filter(Boolean),
-      ['sort']
-    )
+    return props.customSelectedOptions.get(model, sortedOptions.value)
   },
-  set(values) {
-    model.value = sortBy(
-      asArray(values).map((o: any) => o.value),
-      ['sort']
-    )
+  set(options) {
+    props.customSelectedOptions.set(model, options)
   }
 });
 </script>
