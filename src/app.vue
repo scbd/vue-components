@@ -70,6 +70,21 @@ const nullRef = ref();
         placeholder="Select many foos!"
         label="Multi Select"
       />
+      <MultiSelect
+        :options="options"
+        v-model="selectedOptions"
+        placeholder="Select many foos!"
+        label="Multi Select Templates"
+      >
+        <template #option="{ option }">
+          <span>CUSTOM: {{ option.label }}</span>
+        </template>
+        <template #tag="{ option, remove }">
+          <span>CUSTOM {{ option.label }}</span>
+          <span @click="() => { console.log('custom remove'); remove(option) }"> (rem)</span>
+        </template>
+        <template #clear>Y</template>
+      </MultiSelect>
     </div>
 
     <h2>Multi Language Input</h2>
@@ -129,8 +144,10 @@ const nullRef = ref();
     <h2>Multi Language Function</h2>
     <div class="d-flex flex-column gap-2 align-items-center">
       <code>lstring(langValues):</code> {{ lstring(langValues) }}
-      <code>trim({ en: ' foo ', fr: 'bar', es: undefined, kl: '' }): </code> {{ trim({ en: ' foo ', fr: 'bar', es:
-      undefined, kl: '' }) }}
+      <code>trim({ en: ' foo ', fr: 'bar', es: undefined, kl: '' }): </code> {{ trim({
+        en: ' foo ', fr: 'bar', es:
+          undefined, kl: ''
+      }) }}
       <code>isNullOrEmpty({ en: 'nope' }): </code> {{ isNullOrEmpty({ en: 'nope' }) }}
       <code>isNullOrEmpty({ en: '', fr: 'non' }): </code> {{ isNullOrEmpty({ en: '', fr: 'non' }) }}
       <code>isNullOrEmpty({ en: ' ' }): </code> {{ isNullOrEmpty({ en: ' ' }) }}

@@ -21,27 +21,41 @@
       :disabled="disabled"
     >
       <template #option="{ option }">
-        <span>{{ option.label }}</span>
+        <slot
+          name="option"
+          :option="option"
+        >
+          <span>{{ option.label }}</span>
+        </slot>
       </template>
 
       <template #tag="{ option, remove }">
         <span class="multiselect__tag">
-          <span>{{ option.label }}</span>
-          <i
-            aria-hidden="true"
-            tabindex="1"
-            class="multiselect__tag-icon"
-            @click="remove(option)"
-          />
+          <slot
+            name="tag"
+            :option="option"
+            :remove="remove"
+          >
+            <span>{{ option.label }}</span>
+            <i
+              aria-hidden="true"
+              tabindex="1"
+              class="multiselect__tag-icon"
+              @click="remove(option)"
+            />
+          </slot>
         </span>
       </template>
 
       <template #clear>
         <div
           v-if="selectedOptions.length"
-          class="multiselect__clear"
           @mousedown.prevent.stop="selectedOptions = []"
-        />
+        >
+          <div class="multiselect__clear">
+            <slot name="clear">×</slot>
+          </div>
+        </div>
       </template>
     </multiselect>
   </FormInputWrapper>
