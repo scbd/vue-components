@@ -89,7 +89,7 @@ import Multiselect from 'vue-multiselect';
 import asArray from '../utils/as-array'
 import sortBy from 'lodash-es/sortBy'
 
-type Option = { label: string, value: string | number };
+type Option = { label: string, value: any };
 type ModelValue = string | string[];
 
 const props = withDefaults(defineProps<{
