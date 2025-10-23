@@ -58,7 +58,7 @@ const props = withDefaults(defineProps<{
   id: uuidv4(),
   searchable: true,
   clearOnSelect: false,
-  closeOnSelect: false,
+  closeOnSelect: true,
 });
 
 const model = defineModel<string | null>();
