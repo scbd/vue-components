@@ -102,14 +102,14 @@ const props = withDefaults(defineProps<{
   invalid?: boolean,
   feedbackValid?: string,
   feedbackInvalid?: string,
-  customSelectedOptions?: {
-    get: (model: ModelRef<ModelValue>, options: Option[]) => Option[],
-    set: (model: ModelRef<ModelValue>, options: Option[]) => void
-  },
   maxDisplaySelections?: number,
   searchable?: boolean,
   clearOnSelect?: boolean,
   closeOnSelect?: boolean,
+  customSelectedOptions?: {
+    get: (model: ModelRef<ModelValue>, options: Option[]) => Option[],
+    set: (model: ModelRef<ModelValue>, options: Option[]) => void
+  },
 }>(), {
   id: uuidv4(),
   maxDisplaySelections: 3,
