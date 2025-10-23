@@ -13,7 +13,7 @@
       track-by="value"
       :placeholder="placeholder"
       :options="sortedOptions"
-      :multiple="multiple"
+      :multiple="false"
       :searchable="searchable"
       :clear-on-select="clearOnSelect"
       :close-on-select="closeOnSelect"
@@ -107,14 +107,12 @@ const props = withDefaults(defineProps<{
     set: (model: ModelRef<ModelValue>, options: Option[]) => void
   },
   maxDisplaySelections?: number,
-  multiple?: boolean,
   searchable?: boolean,
   clearOnSelect?: boolean,
   closeOnSelect?: boolean,
 }>(), {
   id: uuidv4(),
   maxDisplaySelections: 3,
-  multiple: true,
   searchable: true,
   clearOnSelect: false,
   closeOnSelect: false,

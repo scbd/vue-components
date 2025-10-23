@@ -13,17 +13,20 @@
       :placeholder="placeholder"
       :options="options"
       :multiple="false"
-      :searchable="false"
-      :clear-on-select="false"
-      :close-on-select="true"
+      :searchable="searchable"
+      :clear-on-select="clearOnSelect"
+      :close-on-select="closeOnSelect"
       :disabled="disabled"
     >
       <template #clear>
         <div
-          v-if="!!selectedOption"
-          class="multiselect__clear"
+           v-if="!!selectedOption"
           @mousedown.prevent.stop="selectedOption = null"
-        />
+        >
+          <div class="multiselect__clear">
+            <slot name="clear">×</slot>
+          </div>
+        </div>
       </template>
     </multiselect>
   </FormInputWrapper>
@@ -44,19 +47,25 @@ const props = withDefaults(defineProps<{
   label?: string,
   disabled?: boolean,
   placeholder?: string,
-  valid?: boolean, 
+  valid?: boolean,
   invalid?: boolean,
   feedbackValid?: string,
-  feedbackInvalid?: string,  
+  feedbackInvalid?: string,
+  searchable?: boolean,
+  clearOnSelect?: boolean,
+  closeOnSelect?: boolean,
 }>(), {
   id: uuidv4(),
+  searchable: true,
+  clearOnSelect: false,
+  closeOnSelect: false,
 });
 
 const model = defineModel<string | null>();
 
 const selectedOption = computed({
-  get() { 
-    return props.options.find((s: any) => s.value == model.value) || null 
+  get() {
+    return props.options.find((s: any) => s.value == model.value) || null
   },
   set(v: { value: string } | null) { model.value = v?.value || null }
 });
