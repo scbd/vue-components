@@ -13,10 +13,10 @@
       track-by="value"
       :placeholder="placeholder"
       :options="sortedOptions"
-      :multiple="true"
-      :searchable="true"
-      :clear-on-select="false"
-      :close-on-select="false"
+      :multiple="multiple"
+      :searchable="searchable"
+      :clear-on-select="clearOnSelect"
+      :close-on-select="closeOnSelect"
       :invalid="invalid"
       :disabled="disabled"
     >
@@ -29,6 +29,20 @@
         </slot>
       </template>
 
+      <template #selection="{ values }">
+        <span
+          class="multiselect__single"
+          v-if="maxDisplaySelections && values.length > maxDisplaySelections"
+        >
+          <slot
+            name="selection"
+            :values="values"
+          >
+            {{ values.length }} selected
+          </slot>
+        </span>
+      </template>
+
       <template #tag="{ option, remove }">
         <span class="multiselect__tag">
           <slot
@@ -37,12 +51,14 @@
             :remove="remove"
           >
             <span>{{ option.label }}</span>
-            <i
-              aria-hidden="true"
-              tabindex="1"
-              class="multiselect__tag-icon"
-              @click="remove(option)"
-            />
+            <span style="padding: 6px">
+              <i
+                aria-hidden="true"
+                tabindex="1"
+                class="multiselect__tag-icon"
+                @click="remove(option)"
+              />
+            </span>
           </slot>
         </span>
       </template>
@@ -89,9 +105,19 @@ const props = withDefaults(defineProps<{
   customSelectedOptions?: {
     get: (model: ModelRef<ModelValue>, options: Option[]) => Option[],
     set: (model: ModelRef<ModelValue>, options: Option[]) => void
-  }
+  },
+  maxDisplaySelections?: number,
+  multiple?: boolean,
+  searchable?: boolean,
+  clearOnSelect?: boolean,
+  closeOnSelect?: boolean,
 }>(), {
   id: uuidv4(),
+  maxDisplaySelections: 3,
+  multiple: true,
+  searchable: true,
+  clearOnSelect: false,
+  closeOnSelect: false,
   customSelectedOptions: {
     // @ts-ignore type check doesn't understand that .filter(Boolean) will remove all undefined options
     get(model: ModelRef<ModelValue>, options: Option[]) {
@@ -111,7 +137,7 @@ const props = withDefaults(defineProps<{
   }
 });
 
-const model = defineModel<ModelValue>({ required: true});
+const model = defineModel<ModelValue>({ required: true });
 
 const sortedOptions = computed(() => props.options.map((o, i) => ({ ...o, sort: i })));
 

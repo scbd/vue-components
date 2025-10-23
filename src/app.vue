@@ -19,6 +19,7 @@ const options = [
   { label: "FOO!", value: 'foo' },
   { label: "BAR!!", value: 'bar' },
   { label: "CAR!!!", value: 'car' },
+  { label: "DAR?", value: 'dar' },
 ];
 
 const selectedOption = ref();
@@ -76,15 +77,23 @@ const nullRef = ref();
         v-model="selectedOptions"
         placeholder="Select many foos!"
         label="Multi Select Templates"
+        :max-display-selections="1"
       >
         <template #option="{ option }">
-          <span>CUSTOM: {{ option.label }}</span>
+          ☞ {{ option.label }}
         </template>
         <template #tag="{ option, remove }">
-          <span>CUSTOM {{ option.label }}</span>
-          <span @click="() => { console.log('custom remove'); remove(option) }"> (rem)</span>
+          ☞ {{ option.value }}
+          <span
+            role="button"
+            class="ms-1"
+            @click="() => { console.log('custom remove'); remove(option) }"
+          >✘</span>
         </template>
-        <template #clear>Y</template>
+        <template #clear>✘</template>
+        <template #selection="{ values }">
+          {{ values.length }} foos
+        </template>
       </MultiSelect>
       <MultiSelect
         :options="options"
@@ -98,7 +107,7 @@ const nullRef = ref();
               .find((option) => option.value === value))
               .filter(Boolean)
           },
-          set(model, options) { 
+          set(model, options) {
             model.value = options.map((o: any) => o.value)
           }
         }"
@@ -163,8 +172,8 @@ const nullRef = ref();
     <div class="d-flex flex-column gap-2 align-items-center">
       <code>lstring(langValues):</code> {{ lstring(langValues) }}
       <code>trim({ en: ' foo ', fr: 'bar', es: undefined, kl: '' }): </code> {{ trim({
-        en: ' foo ', fr: 'bar', es:
-          undefined, kl: ''
+      en: ' foo ', fr: 'bar', es:
+      undefined, kl: ''
       }) }}
       <code>isNullOrEmpty({ en: 'nope' }): </code> {{ isNullOrEmpty({ en: 'nope' }) }}
       <code>isNullOrEmpty({ en: '', fr: 'non' }): </code> {{ isNullOrEmpty({ en: '', fr: 'non' }) }}
