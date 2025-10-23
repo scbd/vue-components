@@ -13,7 +13,7 @@
       track-by="value"
       :placeholder="placeholder"
       :options="sortedOptions"
-      :multiple="false"
+      :multiple="true"
       :searchable="searchable"
       :clear-on-select="clearOnSelect"
       :close-on-select="closeOnSelect"
