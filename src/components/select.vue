@@ -13,10 +13,10 @@
       track-by="value"
       :placeholder="placeholder"
       :options="sortedOptions"
-      :multiple="true"
+      :multiple="multiple"
       :searchable="searchable"
       :clear-on-select="clearOnSelect"
-      :close-on-select="closeOnSelect"
+      :close-on-select="internalCloseOnSelect"
       :invalid="invalid"
       :disabled="disabled"
     >
@@ -81,16 +81,15 @@
   setup
   lang="ts"
 >
-import FormInputWrapper from './form-input-wrapper.vue'
+import isEqual from 'lodash-es/isEqual'
+import sortBy from 'lodash-es/sortBy'
 import { v4 as uuidv4 } from 'uuid';
 import { computed } from 'vue';
-import type { ModelRef } from 'vue';
 import Multiselect from 'vue-multiselect';
+import FormInputWrapper from './form-input-wrapper.vue'
 import asArray from '../utils/as-array'
-import sortBy from 'lodash-es/sortBy'
 
 type Option = { label: string, value: any };
-type ModelValue = string | string[];
 
 const props = withDefaults(defineProps<{
   id?: string,
@@ -103,48 +102,38 @@ const props = withDefaults(defineProps<{
   feedbackValid?: string,
   feedbackInvalid?: string,
   maxDisplaySelections?: number,
+  multiple?: boolean,
   searchable?: boolean,
   clearOnSelect?: boolean,
   closeOnSelect?: boolean,
-  customSelectedOptions?: {
-    get: (model: ModelRef<ModelValue>, options: Option[]) => Option[],
-    set: (model: ModelRef<ModelValue>, options: Option[]) => void
-  },
 }>(), {
   id: uuidv4(),
   maxDisplaySelections: 3,
+  multiple: false,
   searchable: true,
-  clearOnSelect: false,
-  closeOnSelect: false,
-  customSelectedOptions: {
-    // @ts-ignore type check doesn't understand that .filter(Boolean) will remove all undefined options
-    get(model: ModelRef<ModelValue>, options: Option[]) {
-      return sortBy(
-        asArray(model.value).map((value: any) => options
-          .find((option: Option) => option.value === value))
-          .filter(Boolean),
-        ['sort']
-      )
-    },
-    set(model: ModelRef<ModelValue>, options: Option[]) {
-      model.value = sortBy(
-        asArray(options).map((o: any) => o.value),
-        ['sort']
-      )
-    }
-  }
 });
 
-const model = defineModel<ModelValue>({ required: true });
+// set sensible default for single and multi select modes (can't look at prop values in withDefaults)
+const internalCloseOnSelect = props.closeOnSelect || !props.multiple;
+
+const model = defineModel<string | string[]>({ required: true });
 
 const sortedOptions = computed(() => props.options.map((o, i) => ({ ...o, sort: i })));
 
 const selectedOptions = computed({
   get() {
-    return props.customSelectedOptions.get(model, sortedOptions.value)
+    return sortBy(
+      asArray(model.value).map((value: any) => sortedOptions.value
+        .find((option: Option) => isEqual(option.value, value)))
+        .filter(Boolean),
+      ['sort']
+    )
   },
   set(options) {
-    props.customSelectedOptions.set(model, options)
+    model.value = sortBy(
+      asArray(options).map((o: any) => o.value),
+      ['sort']
+    )
   }
 });
 </script>

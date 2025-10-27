@@ -9,11 +9,9 @@ import DateRangeInput from './components/date-range-input.vue';
 import DatetimeInput from './components/datetime-input.vue';
 import DatetimeRangeInput from './components/datetime-range-input.vue';
 import MultiLanguageInput from './components/multi-language-input.vue';
-import MultiSelect from './components/multi-select.vue';
-import SingleSelect from './components/single-select.vue';
+import Select from './components/select.vue';
 import type { Language } from './data/un-languages';
 import lstring, { trim, isNullOrEmpty, isNullOrWhiteSpace } from './utils/lstring';
-import asArray from './utils/as-array';
 
 const options = [
   { label: "FOO!", value: 'foo' },
@@ -60,24 +58,26 @@ const nullRef = ref();
     <h2>Single and Multi Select</h2>
 
     <div style="width: 15rem; display: flex; flex-direction: column; gap: 1rem;">
-      <SingleSelect
+      <Select
         :options="options"
         v-model="selectedOption"
         placeholder="Select an foo!"
         label="Single Select"
       />
-      <MultiSelect
+      <Select
         :options="options"
         v-model="selectedOptions"
         placeholder="Select many foos!"
         label="Multi Select"
+        :multiple="true"
       />
-      <MultiSelect
+      <Select
         :options="options"
         v-model="selectedOptions"
         placeholder="Select many foos!"
         label="Multi Select Templates"
-        :max-display-selections="1"
+        :multiple="true"
+        :max-display-selections="2"
       >
         <template #option="{ option }">
           ☞ {{ option.label }}
@@ -94,24 +94,7 @@ const nullRef = ref();
         <template #selection="{ values }">
           {{ values.length }} foos
         </template>
-      </MultiSelect>
-      <MultiSelect
-        :options="options"
-        v-model="selectedOptions"
-        placeholder="Select many foos!"
-        label="Multi Select w/ customSelectedOptions (keep insertion order)"
-        :customSelectedOptions="{
-          // @ts-ignore
-          get(model, options) {
-            return asArray(model.value).map((value: any) => options
-              .find((option) => option.value === value))
-              .filter(Boolean)
-          },
-          set(model, options) {
-            model.value = options.map((o: any) => o.value)
-          }
-        }"
-      />
+      </Select>
     </div>
 
     <h2>Multi Language Input</h2>

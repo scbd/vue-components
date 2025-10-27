@@ -6,8 +6,7 @@ import DatetimeInput from './components/datetime-input.vue';
 import DatetimeRangeInput from './components/datetime-range-input.vue';
 import FormInputWrapper from './components/form-input-wrapper.vue';
 import MultiLanguageInput from './components/multi-language-input.vue';
-import MultiSelect from './components/multi-select.vue';
-import SingleSelect from './components/single-select.vue';
+import Select from './components/select.vue';
 import './assets/scss/style.scss';
 
 // Named exports (tree-shakable)
@@ -18,8 +17,7 @@ export {
   DatetimeRangeInput,
   MultiLanguageInput,
   FormInputWrapper,
-  MultiSelect,
-  SingleSelect,
+  Select,
 };
 
 // Vue plugin (global registration)
@@ -31,8 +29,7 @@ export default {
     app.component('ScbdDatetimeRangeInput', DatetimeRangeInput);
     app.component('ScbdFormInputWrapper', FormInputWrapper);
     app.component('ScbdMultiLanguageInput', MultiLanguageInput);
-    app.component('ScbdMultiSelect', MultiSelect);
-    app.component('ScbdSingleSelect', SingleSelect);
+    app.component('ScbdSelect', Select);
   },
 };
 

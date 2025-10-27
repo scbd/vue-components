@@ -36,17 +36,18 @@ const timezone = "America/Montreal";
 
     <h2>Single and Multi Select</h2>
     <div style="width: 15rem; display: flex; flex-direction: column; gap: 1rem;">
-      <ScbdSingleSelect
+      <ScbdSelect
         :options="options"
         v-model="selectedOption"
         placeholder="Select an foo!"
         label="Single Select"
       />
-      <ScbdMultiSelect
+      <ScbdSelect
         :options="options"
         v-model="selectedOptions"
         placeholder="Select many foos!"
         label="Multi Select"
+        :multiple="true"
       />
     </div>
 
