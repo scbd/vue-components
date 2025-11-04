@@ -86,8 +86,9 @@ import sortBy from 'lodash-es/sortBy'
 import { v4 as uuidv4 } from 'uuid';
 import { computed } from 'vue';
 import Multiselect from 'vue-multiselect';
-import FormInputWrapper from './form-input-wrapper.vue'
-import asArray from '../utils/as-array'
+import FormInputWrapper from './form-input-wrapper.vue';
+import asArray from '../utils/as-array';
+import asValue from '../utils/as-value';
 
 type Option = { label: string, value: any };
 
@@ -114,9 +115,9 @@ const props = withDefaults(defineProps<{
 });
 
 // set sensible default for single and multi select modes (can't look at prop values in withDefaults)
-const internalCloseOnSelect = props.closeOnSelect || !props.multiple;
+const internalCloseOnSelect = computed(() => props.closeOnSelect || !props.multiple);
 
-const model = defineModel<string | string[]>({ required: true });
+const model = defineModel<any | any[]>({ required: true });
 
 const sortedOptions = computed(() => props.options.map((o, i) => ({ ...o, sort: i })));
 
@@ -130,10 +131,11 @@ const selectedOptions = computed({
     )
   },
   set(options) {
-    model.value = sortBy(
+    const value = sortBy(
       asArray(options).map((o: any) => o.value),
       ['sort']
-    )
+    );
+    model.value = props.multiple ? value : asValue(value);
   }
 });
 </script>
