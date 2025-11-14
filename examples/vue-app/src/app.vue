@@ -5,6 +5,15 @@
 import { ref } from 'vue';
 import { lstring } from '@scbd/vue-components';
 
+const options = [
+  { label: "FOO!", value: 'foo' },
+  { label: "BAR!!", value: 'bar' },
+  { label: "CAR!!!", value: 'car' },
+];
+
+const selectedOption = ref();
+const selectedOptions = ref([]);
+
 const langValues = ref({
   en: 'English value',
   fr: 'La valeure française'
@@ -25,20 +34,37 @@ const timezone = "America/Montreal";
   >
     <h1 class="bar">Example Vue App</h1>
 
+    <h2>Single and Multi Select</h2>
+    <div style="width: 15rem; display: flex; flex-direction: column; gap: 1rem;">
+      <ScbdSelect
+        :options="options"
+        v-model="selectedOption"
+        placeholder="Select an foo!"
+        label="Single Select"
+      />
+      <ScbdSelect
+        :options="options"
+        v-model="selectedOptions"
+        placeholder="Select many foos!"
+        label="Multi Select"
+        :multiple="true"
+      />
+    </div>
+
     <h2>Multi Language Input</h2>
-    <MultiLanguageInput
+    <ScbdMultiLanguageInput
       label="Multi Language Input"
       v-model="langValues"
     />
-    <MultiLanguageInput
+    <ScbdMultiLanguageInput
       label="Multi Language Input (valid)"
       :valid="{ en: true, fr: true }"
     />
-    <MultiLanguageInput
+    <ScbdMultiLanguageInput
       label="Multi Language Input (invalid)"
       :valid="{ en: false }"
     />
-    <MultiLanguageInput
+    <ScbdMultiLanguageInput
       label="Multi Language Input (custom languages)"
       v-model="customLangValues"
       :languages="[
@@ -53,21 +79,21 @@ const timezone = "America/Montreal";
     </div>
 
     <h2>Date Inputs</h2>
-    <DateInput
+    <ScbdDateInput
       label="Date"
       v-model="date"
-    ></DateInput>
-    <DateRangeInput
+    ></ScbdDateInput>
+    <ScbdDateRangeInput
       label="Date"
       v-model:start-date="date"
       v-model:end-date="date"
     />
-    <DatetimeInput
+    <ScbdDatetimeInput
       label="Datetime"
       v-model="datetime"
       :timezone="timezone"
     />
-    <DatetimeRangeInput
+    <ScbdDatetimeRangeInput
       label="Datetime"
       v-model:start-date="datetime"
       v-model:end-date="datetime"

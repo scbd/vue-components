@@ -1,0 +1,11 @@
+@use "variables";
+
+:root {
+  /* make CCard's header background color available to other components, ie table header background */
+  --cui-card-cap-bg: #{variables.$card-cap-bg};
+}
+
+/* light color is too light */
+.btn-ghost-light {
+  --cui-btn-color: var(--cui-tertiary-color);
+}

@@ -2,7 +2,9 @@
   <div class="multi-language-input">
     <CFormLabel v-if="label">{{ label }}</CFormLabel>
     <FormInputWrapper
-      :invalid="computedInvalid"
+      :valid="someValid"
+      :invalid="someInvalid"
+      :feedback-valid="feedbackValid"
       :feedback-invalid="feedbackInvalid"
     >
       <div
@@ -20,8 +22,8 @@
               :rows="rows"
               :modelValue="computedModel[lang.locale]"
               @update:modelValue="modelUpdated(lang.locale, $event)"
-              :valid="valid && valid[lang.locale] === true"
-              :invalid="computedInvalid"
+              :valid="isValid[lang.locale] || !expanded && someValid"
+              :invalid="isInvalid[lang.locale] || !expanded && someInvalid"
             />
             <CFormInput
               v-else
@@ -30,8 +32,8 @@
               :placeholder="placeholders && placeholders[lang.locale] || lang.name"
               :modelValue="computedModel[lang.locale]"
               @update:modelValue="modelUpdated(lang.locale, $event)"
-              :valid="valid && valid[lang.locale] === true"
-              :invalid="computedInvalid"
+              :valid="isValid[lang.locale] || !expanded && someValid"
+              :invalid="isInvalid[lang.locale] || !expanded && someInvalid"
             />
             <CInputGroupText
               v-if="index == 0"
@@ -74,7 +76,9 @@ const props = withDefaults(defineProps<{
   label?: string,
   multiple?: boolean,
   rows?: number,
-  valid?: { [locale: string]: boolean },
+  valid?: boolean | { [Locale: string]: boolean },
+  invalid?: boolean | { [Locale: string]: boolean },
+  feedbackValid?: string,
   feedbackInvalid?: string,
   languages?: Language[],
   placeholders?: LString,
@@ -87,7 +91,22 @@ const props = withDefaults(defineProps<{
 const [model, modifiers] = defineModel<LString>();
 
 const computedModel = computed(() => model.value || {});
-const computedInvalid = computed(() => props.valid && Object.values(props.valid).filter(Boolean).length == 0)
+
+const isValid = computed<any>(() => typeof (props.valid) === "boolean"
+  ? props.languages.reduce((valid, lang) => ({ ...valid, [lang.locale]: props.valid }), {})
+  : props.valid);
+
+const isInvalid = computed<any>(() => typeof (props.invalid) === "boolean"
+  ? props.languages.reduce((invalid, lang) => ({ ...invalid, [lang.locale]: props.invalid }), {})
+  : props.invalid);
+
+const someValid = computed(() => typeof (props.valid) === "boolean"
+  ? props.valid
+  : props.valid && Object.values(props.valid).some((v) => v === true))
+
+const someInvalid = computed(() => typeof (props.invalid) === "boolean"
+  ? props.invalid
+  : props.invalid && Object.values(props.invalid).some((v) => v === true))
 
 const modelUpdated = (locale: Locale, value: string) => {
   if (modifiers.trim) {

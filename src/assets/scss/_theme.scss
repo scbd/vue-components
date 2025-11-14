@@ -1,0 +1,157 @@
+@use "@coreui/coreui/scss/coreui" as coreui;
+
+.wrapper {
+  width: 100%;
+  @include coreui.ltr-rtl("padding-left", var(--cui-sidebar-occupy-start, 0));
+  @include coreui.ltr-rtl("padding-right", var(--cui-sidebar-occupy-end, 0));
+  will-change: auto;
+  @include coreui.transition(padding .15s);
+}
+
+.sidebar {
+  background: rgb(60, 75, 100);
+}
+
+.sidebar .nav-link:hover {
+  color: white;
+  background: #321fdb;
+}
+
+.sidebar .sidebar-header,
+.sidebar .sidebar-footer {
+  background: rgba(0, 0, 21, .2);
+}
+
+.nav-link {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.sidebar .sidebar-dev-narrow {
+  display: none
+}
+
+.sidebar.sidebar-narrow-unfoldable .sidebar-dev-narrow {
+  display: block;
+}
+
+.sidebar.sidebar-narrow-unfoldable .sidebar-dev-full {
+  display: none;
+}
+
+.sidebar.sidebar-narrow-unfoldable:hover .sidebar-dev-narrow {
+  display: none;
+}
+
+.sidebar.sidebar-narrow-unfoldable:hover .sidebar-dev-full {
+  display: block;
+}
+
+.header > .container-fluid,
+.sidebar-header {
+  min-height: calc(4rem + 1px); // stylelint-disable-line function-disallowed-list
+}
+
+.sidebar-brand-full {
+  margin-left: 3px;
+}
+
+.sidebar-header {
+  .nav-underline-border {
+    --cui-nav-underline-border-link-padding-x: 1rem;
+    --cui-nav-underline-border-gap: 0;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    min-height: calc(4rem + 1px); // stylelint-disable-line function-disallowed-list
+  }
+}
+
+.sidebar-toggler {
+  @include coreui.ltr-rtl("margin-left", auto);
+}
+
+.sidebar-narrow,
+.sidebar-narrow-unfoldable:not(:hover) {
+  .sidebar-toggler {
+    @include coreui.ltr-rtl("margin-right", auto);
+  }
+}
+
+.header > .container-fluid + .container-fluid {
+  min-height: 3rem;
+}
+
+.footer {
+  min-height: calc(3rem + 1px); // stylelint-disable-line function-disallowed-list
+}
+
+@if coreui.$enable-dark-mode {
+  @include coreui.color-mode(dark) {
+    body {
+      background-color: var(--cui-dark-bg-subtle);
+    }
+
+    .footer {
+      --cui-footer-bg: var(--cui-body-bg);
+    }
+  }
+}
+
+// table with rounded corners 
+
+.table {
+  --border-radius: 6px;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 0;
+}
+
+.table th,
+.table td {
+  border-bottom: var(--cui-border-width) solid var(--cui-table-border-color);
+  border-right: var(--cui-border-width) solid var(--cui-table-border-color);
+}
+
+.table tr td:first-child,
+.table tr th:first-child {
+  border-left: var(--cui-border-width) solid var(--cui-table-border-color);
+}
+
+.table thead th {
+  border-top: var(--cui-border-width) solid var(--cui-table-border-color);
+}
+
+.table thead th:first-child {
+  border-top-left-radius: var(--border-radius);
+}
+
+.table thead th:last-child {
+  border-top-right-radius: var(--border-radius);
+}
+
+.table tbody:not(:has(~tfoot)) tr:last-child th:last-child,
+.table tbody:not(:has(~tfoot)) tr:last-child td:last-child,
+.table tfoot td:last-child {
+  border-bottom-right-radius: var(--border-radius);
+}
+
+.table tbody:not(:has(~tfoot)) tr:last-child th:first-child,
+.table tbody:not(:has(~tfoot)) tr:last-child td:first-child,
+.table tfoot td:first-child {
+  border-bottom-left-radius: var(--border-radius);
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: 1rem;
+}
+
+.table th:last-child,
+.table th.sortable,
+.table td:last-child {
+  padding-right: 1rem;
+}

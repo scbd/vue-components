@@ -35,7 +35,8 @@ const props = defineProps<{
 
 <style scoped>
 /* CFormFeedback expects .is-invalid and .invalid-feedback as siblings but our usecase needs to also support parent/child */
-.is-invalid .invalid-feedback {
+.is-invalid .invalid-feedback, 
+.is-valid .valid-feedback {
   display: block;
 }
 

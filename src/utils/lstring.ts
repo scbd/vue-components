@@ -28,3 +28,15 @@ export default function (ltext: string | LString | { [locale: string]: string } 
 
   return text;
 }
+
+export function trim(ltext: LString) {
+  return Object.entries(ltext).reduce((ret, [k, v]) => ({ ...ret, [k]: v?.trim() }), {});
+}
+
+export function isNullOrEmpty(ltext?: LString) {
+  return !ltext || !Object.values(ltext).some(Boolean);
+}
+
+export function isNullOrWhiteSpace(ltext?: LString) {
+  return !ltext || !Object.values(trim(ltext)).some(Boolean);
+}
