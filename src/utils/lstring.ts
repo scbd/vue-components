@@ -13,7 +13,7 @@ export default function (ltext?: string | LString | { [locale: string]: string }
   const ltextLocales = Object.keys(cleanedLtext);
   const locale = preferedLocales.find((l) => ltextLocales.includes(l)) || "en"; // TODO default to i18n.locale instead ;
 
-  let text = cleanedLtext[locale] as string | undefined;
+  let text = cleanedLtext[locale] as string | null;
 
   if (!text) {
     const firstAvailableLocale = Locales.find((l) => !!cleanedLtext[l]);
