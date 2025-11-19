@@ -7,23 +7,21 @@ export default function (ltext?: string | LString | { [locale: string]: string }
 
   if (typeof (ltext) === 'string') return ltext;
 
-  const cleanedLtext: LString | { [locale: string]: string } = Object.entries(ltext)
-    .filter(isValidLocaleEntry)
-    .reduce((o, [k, v]) => ({ ...o, [k]: v }), {});
-  const ltextLocales = Object.keys(cleanedLtext);
+  const cleaned = cleanLString(ltext) as LString;
+  const ltextLocales = Object.keys(cleaned);
   const locale = preferedLocales.find((l) => ltextLocales.includes(l)) || "en";
 
-  let text = cleanedLtext[locale] as string | null;
+  let text = cleaned[locale] as string | null;
 
   if (!text) {
-    const firstAvailableLocale = Locales.find((l) => !!cleanedLtext[l]);
+    const firstAvailableLocale = Locales.find((l) => !!cleaned[l]);
 
-    if (firstAvailableLocale) text = cleanedLtext[firstAvailableLocale];
+    if (firstAvailableLocale) text = cleaned[firstAvailableLocale];
   }
 
   if (!text) {
     // cannot find any of the un locales..... return first text value
-    text = Object.values(cleanedLtext)
+    text = Object.values(cleaned)
       .filter(o => typeof (o) === 'string')
       .filter(o => !!o)[0];
   }
@@ -42,17 +40,21 @@ export function trim(ltext?: string | LString | { [locale: string]: string }) {
 }
 
 export function isNullOrEmpty(ltext?: string | LString | { [locale: string]: string }) {
-  return !ltext || !Object.entries(ltext)
-    .filter(isValidLocaleEntry)
-    .some(([k, v]) => !!v);
+  return !ltext || !Object.values(cleanLString(ltext)).some(Boolean);
 }
 
 export function isNullOrWhiteSpace(ltext?: string | LString | { [locale: string]: string }) {
-  return !ltext || !Object.entries(trim(ltext))
-    .filter(isValidLocaleEntry)
-    .some(([k, v]) => !!v);
+  return !ltext || !Object.values(trim(cleanLString(ltext))).some(Boolean);
 }
 
 function isValidLocaleEntry([k, v]: any) {
   return k && !k.startsWith("#")
+}
+
+function cleanLString(ltext?: string | LString | { [locale: string]: string }): string | LString | { [locale: string]: string } | null | undefined {
+  if (!ltext || typeof (ltext) === 'string') return ltext;
+
+  return Object.entries(ltext)
+    .filter(isValidLocaleEntry)
+    .reduce((o, [k, v]) => ({ ...o, [k]: v }), {});
 }
