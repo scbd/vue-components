@@ -153,7 +153,6 @@ const nullRef = ref();
 
     <h2>Multi Language Function</h2>
     <div class="d-flex flex-column gap-2 align-items-center">
-      <code>lstring("¡hola!"):</code> {{ lstring("¡hola!") }}
       <code>lstring(langValues):</code> {{ lstring(langValues) }}
       <code>lstring(langValues, 'es', 'fr', 'en'):</code> {{ lstring(langValues, 'es', 'fr', 'en') }}
       <code>lstring({ "#meta": "the meta!", "fr": "L'affaire" }):</code> {{ lstring({ "#meta": "the meta!", "fr": "L'affaire" }) }}
