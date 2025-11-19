@@ -11,7 +11,7 @@ export default function (ltext?: string | LString | { [locale: string]: string }
     .filter(isValidLocaleEntry)
     .reduce((o, [k, v]) => ({ ...o, [k]: v }), {});
   const ltextLocales = Object.keys(cleanedLtext);
-  const locale = preferedLocales.find((l) => ltextLocales.includes(l)) || "en"; // TODO default to i18n.locale instead ;
+  const locale = preferedLocales.find((l) => ltextLocales.includes(l)) || "en";
 
   let text = cleanedLtext[locale] as string | null;
 
