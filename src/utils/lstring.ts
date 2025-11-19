@@ -48,7 +48,7 @@ function isValidLocaleEntry([k, v]: any) {
 }
 
 function cleanLString(ltext?: LString | { [locale: string]: string }): LString | { [locale: string]: string } {
-  if (!ltext) return ltext;
+  if (!ltext) return {};
 
   return Object.entries(ltext)
     .filter(isValidLocaleEntry)
