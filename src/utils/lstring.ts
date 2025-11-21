@@ -2,7 +2,7 @@ import { Locales } from "../data/un-languages";
 import type { Locale } from "../types/lstring";
 import type LString from "../types/lstring";
 
-export default function (ltext?: LString | { [locale: string]: string }, ...preferedLocales: Locale[]): string {
+export default function (ltext: LString | { [locale: string]: string }, ...preferedLocales: Locale[]): string {
   if (!ltext) return "";
 
   const cleaned = cleanLString(ltext) as LString;
@@ -29,17 +29,17 @@ export default function (ltext?: LString | { [locale: string]: string }, ...pref
   return text;
 }
 
-export function trim(ltext?: LString | { [locale: string]: string }) {
+export function trim(ltext: LString | { [locale: string]: string }) {
   if (!ltext) return ltext;
 
   return Object.entries(ltext).reduce((ret, [k, v]) => ({ ...ret, [k]: v?.trim() }), {});
 }
 
-export function isNullOrEmpty(ltext?: LString | { [locale: string]: string }) {
+export function isNullOrEmpty(ltext: LString | { [locale: string]: string }) {
   return !ltext || !Object.values(cleanLString(ltext)).some(Boolean);
 }
 
-export function isNullOrWhiteSpace(ltext?: LString | { [locale: string]: string }) {
+export function isNullOrWhiteSpace(ltext: LString | { [locale: string]: string }) {
   return !ltext || !Object.values(trim(cleanLString(ltext))).some(Boolean);
 }
 
@@ -47,7 +47,7 @@ function isValidLocaleEntry([k, v]: any) {
   return k && !k.startsWith("#")
 }
 
-function cleanLString(ltext?: LString | { [locale: string]: string }): LString | { [locale: string]: string } {
+function cleanLString(ltext: LString | { [locale: string]: string }): LString | { [locale: string]: string } {
   if (!ltext) return {};
 
   return Object.entries(ltext)
