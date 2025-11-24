@@ -154,18 +154,20 @@ const nullRef = ref();
     <h2>Multi Language Function</h2>
     <div class="d-flex flex-column gap-2 align-items-center">
       <code>lstring(langValues):</code> {{ lstring(langValues) }}
-      <code>trim({ en: ' foo ', fr: 'bar', es: undefined, kl: '' }): </code> {{ trim({
-      en: ' foo ', fr: 'bar', es:
-      undefined, kl: ''
-      }) }}
+      <code>lstring(langValues, 'es', 'fr', 'en'):</code> {{ lstring(langValues, 'es', 'fr', 'en') }}
+      <code>lstring({ "#meta": "the meta!", "fr": "L'affaire" }):</code> {{ lstring({ "#meta": "the meta!", "fr": "L'affaire" }) }}
+      <code>lstring({ "#meta": "the meta!" }):</code> {{ lstring({ "#meta": "the meta!" }) }}
+      <code>trim({ en: ' foo ', fr: 'bar', es: undefined, kl: '' }): </code> {{ trim({ en: ' foo ', fr: 'bar', es: undefined, kl: '' }) }}
       <code>isNullOrEmpty({ en: 'nope' }): </code> {{ isNullOrEmpty({ en: 'nope' }) }}
       <code>isNullOrEmpty({ en: '', fr: 'non' }): </code> {{ isNullOrEmpty({ en: '', fr: 'non' }) }}
       <code>isNullOrEmpty({ en: ' ' }): </code> {{ isNullOrEmpty({ en: ' ' }) }}
       <code>isNullOrEmpty({}): </code> {{ isNullOrEmpty({}) }}
+      <code>isNullOrEmpty({ "#meta": "Meta stuff" }): </code> {{ isNullOrEmpty({ "#meta": "Meta stuff" }) }}
       <code>isNullOrEmpty(): </code> {{ isNullOrEmpty() }}
       <code>isNullOrWhiteSpace({}): </code> {{ isNullOrWhiteSpace({ en: '' }) }}
       <code>isNullOrWhiteSpace({ en: '' }): </code> {{ isNullOrWhiteSpace({ en: '' }) }}
       <code>isNullOrWhiteSpace({ en: ' ' }): </code> {{ isNullOrWhiteSpace({ en: ' ' }) }}
+      <code>isNullOrWhiteSpace({ en: ' ', "#meta": "ASDF" }): </code> {{ isNullOrWhiteSpace({ en: ' ', "#meta": "ASDF" }) }}
       <code>isNullOrWhiteSpace({ en: 'nope' }): </code> {{ isNullOrWhiteSpace({ en: 'nope' }) }}
     </div>
 
