@@ -9,7 +9,7 @@ export default function (ltext: LString | { [locale: string]: string }, ...prefe
   const ltextLocales = Object.keys(cleaned);
   const locale = preferedLocales.find((l) => ltextLocales.includes(l)) || "en";
 
-  let text = cleaned[locale] as string | null;
+  let text = cleaned[locale] as string | null | undefined;
 
   if (!text) {
     const firstAvailableLocale = Locales.find((l) => !!cleaned[l]);
