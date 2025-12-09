@@ -35,11 +35,11 @@ export function trim(ltext: LString | { [locale: string]: string }) {
   return Object.entries(ltext).reduce((ret, [k, v]) => ({ ...ret, [k]: v?.trim() }), {});
 }
 
-export function isNullOrEmpty(ltext: LString | { [locale: string]: string }) {
+export function isNullOrEmpty(ltext?: LString | { [locale: string]: string }) {
   return !ltext || !Object.values(cleanLString(ltext)).some(Boolean);
 }
 
-export function isNullOrWhiteSpace(ltext: LString | { [locale: string]: string }) {
+export function isNullOrWhiteSpace(ltext?: LString | { [locale: string]: string }) {
   return !ltext || !Object.values(trim(cleanLString(ltext))).some(Boolean);
 }
 
