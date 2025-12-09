@@ -31,7 +31,7 @@
     "build": "vite build && vue-tsc -p tsconfig.json",
     "prepare": "vite build && vue-tsc -p tsconfig.json",
     "prepack": "vite build && vue-tsc -p tsconfig.json",
-    "clean": "rm -rf ./dist ./dist-types"
+    "clean-reinstall": "rm -rf node_modules dist dist-types && yarn install"
   },
   "peerDependencies": {
     "@coreui/coreui": "^5.2.0",
