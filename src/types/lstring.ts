@@ -2,10 +2,10 @@ type Letter = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 
 
 type TwoLetterKey = `${Letter}${Letter}`
 type ThreeLetterKey = `${Letter}${Letter}${Letter}`
-export type Locale = TwoLetterKey | ThreeLetterKey
+type Locale = TwoLetterKey | ThreeLetterKey
 
 type LString = {
     [locale in Locale]?: string
 }
 
-export type { LString as default }
+export type { LString as default, Locale }

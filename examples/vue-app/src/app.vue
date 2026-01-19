@@ -3,7 +3,7 @@
   lang="ts"
 >
 import { ref } from 'vue';
-import { lstring } from '@scbd/vue-components';
+import { lstring, type LString, type Locale } from '@scbd/vue-components';
 
 const options = [
   { label: "FOO!", value: 'foo' },
@@ -26,6 +26,8 @@ const customLangValues = ref({
 const date = ref('2000-01-01');
 const datetime = ref(new Date().toISOString());
 const timezone = "America/Montreal";
+
+console.log('Locale and LString', { asLocale: 'en' as Locale, asLString: { en: 'The Foo!'} as LString })
 </script>
 
 <template>
