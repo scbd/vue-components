@@ -41,4 +41,4 @@ export { Languages } from './data/un-languages';
 
 // types
 export type { Language } from './data/un-languages';
-export type { default as LString } from './types/lstring';
+export type { default as LString, Locale } from './types/lstring';
