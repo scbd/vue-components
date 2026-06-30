@@ -27,11 +27,15 @@
   ],
   "scripts": {
     "dev": "vite",
+    "test": "vitest run",
+    "test:headed": "vitest --browser.headless=false",
+    "test:install": "playwright install chromium",
+    "test:watch": "vitest",
     "build:types": "vue-tsc -p tsconfig.json",
     "build": "vite build && vue-tsc -p tsconfig.json",
     "prepare": "vite build && vue-tsc -p tsconfig.json",
     "prepack": "vite build && vue-tsc -p tsconfig.json",
-    "clean-reinstall": "rm -rf node_modules dist dist-types && yarn install"
+    "clean-reinstall": "rm -rf node_modules dist dist-types && yarn install && yarn test:install"
   },
   "peerDependencies": {
     "@coreui/coreui": "^5.2.0",
@@ -50,9 +54,13 @@
     "@types/lodash-es": "^4.17.12",
     "@types/luxon": "^3.7.1",
     "@vitejs/plugin-vue": "^5.0.4",
+    "@vitest/browser": "3.2.4",
+    "playwright": "1.61.1",
     "sass-embedded": "^1.93.2",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
+    "vitest": "3.2.4",
+    "vitest-browser-vue": "1.1.0",
     "vue": "^3.4.21",
     "vue-tsc": "^2.0.6"
   },

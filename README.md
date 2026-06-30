@@ -51,3 +51,16 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(VueComponents)
 })
 ```
+
+## Development and testing
+
+The root development app exercises components directly from source. The app in `examples/vue-app` exercises the package through its public exports. Together they provide a Storybook-like place for people to inspect component states and behavior.
+
+Browser component tests live in `tests/components` and use Vitest Browser Mode with Playwright:
+
+```sh
+yarn test:install
+yarn test
+```
+
+Visual regression testing is not currently enabled. See the [Vitest visual regression testing guide](https://vitest.dev/guide/browser/visual-regression-testing.html) for details.

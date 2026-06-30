@@ -12,6 +12,14 @@ dist
 dist-ssr
 dist-types
 *.local
+*.tsbuildinfo
+
+# Test output
+coverage
+test-results
+playwright-report
+blob-report
+.vitest
 
 # Editor directories and files
 .vscode/*
