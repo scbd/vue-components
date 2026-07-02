@@ -27,7 +27,7 @@ describe('MultiLanguageInput', () => {
     expect(modelValue).toEqual({ en: 'Hello' })
   })
 
-  it('disables every language input and the expand toggle when disabled', async () => {
+  it('disables every language input when disabled', async () => {
     render(MultiLanguageInput, {
       global,
       props: {
@@ -40,7 +40,7 @@ describe('MultiLanguageInput', () => {
     await expect.element(input).toBeDisabled()
   })
 
-  it('does not expand to reveal other languages when disabled', async () => {
+  it('can expand and collapse while disabled', async () => {
     render(MultiLanguageInput, {
       global,
       props: {
@@ -50,6 +50,10 @@ describe('MultiLanguageInput', () => {
     })
 
     const expandToggle = document.querySelector('.multi-language-input .expand') as HTMLElement
+    expandToggle.click()
+
+    await expect.element(page.getByPlaceholder('Español')).toBeDisabled()
+
     expandToggle.click()
 
     await expect.element(page.getByPlaceholder('Español')).not.toBeInTheDocument()

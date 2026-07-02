@@ -40,7 +40,7 @@
             <CInputGroupText
               v-if="index == 0"
               class="expand"
-              @click="!disabled && (expanded = !expanded)"
+              @click="expanded = !expanded"
             >
               <CIcon
                 v-if="expanded"
