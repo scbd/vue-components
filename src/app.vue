@@ -150,6 +150,11 @@ const nullRef = ref();
       :languages="customLangs"
       :placeholders="customLangPlaceholders"
     />
+    <MultiLanguageInput
+      label="Multi Language Input (disabled)"
+      v-model="langValues"
+      disabled
+    />
 
     <h2>Multi Language Function</h2>
     <div class="d-flex flex-column gap-2 align-items-center">

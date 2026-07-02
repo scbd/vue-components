@@ -24,6 +24,7 @@
               @update:modelValue="modelUpdated(lang.locale, $event)"
               :valid="isValid[lang.locale] || !expanded && someValid"
               :invalid="isInvalid[lang.locale] || !expanded && someInvalid"
+              :disabled="disabled"
             />
             <CFormInput
               v-else
@@ -34,11 +35,12 @@
               @update:modelValue="modelUpdated(lang.locale, $event)"
               :valid="isValid[lang.locale] || !expanded && someValid"
               :invalid="isInvalid[lang.locale] || !expanded && someInvalid"
+              :disabled="disabled"
             />
             <CInputGroupText
               v-if="index == 0"
               class="expand"
-              @click="expanded = !expanded"
+              @click="!disabled && (expanded = !expanded)"
             >
               <CIcon
                 v-if="expanded"
@@ -76,6 +78,7 @@ const props = withDefaults(defineProps<{
   label?: string,
   multiple?: boolean,
   rows?: number,
+  disabled?: boolean,
   valid?: boolean | { [Locale: string]: boolean },
   invalid?: boolean | { [Locale: string]: boolean },
   feedbackValid?: string,
