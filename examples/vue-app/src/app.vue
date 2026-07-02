@@ -49,6 +49,13 @@ const timezone = "America/Montreal";
         label="Multi Select"
         :multiple="true"
       />
+      <ScbdSelect
+        :options="options"
+        v-model="selectedOption"
+        placeholder="Disabled select"
+        label="Single Select (disabled)"
+        disabled
+      />
     </div>
 
     <h2>Multi Language Input</h2>
@@ -72,6 +79,11 @@ const timezone = "America/Montreal";
         { locale: 'kl', name: 'Klingon', direction: 'ltr' },
       ]"
     />
+    <ScbdMultiLanguageInput
+      label="Multi Language Input (disabled)"
+      v-model="langValues"
+      disabled
+    />
 
     <h2>Multi Language Function</h2>
     <div class="d-flex gap-2 align-items-center">
@@ -83,21 +95,45 @@ const timezone = "America/Montreal";
       label="Date"
       v-model="date"
     ></ScbdDateInput>
+    <ScbdDateInput
+      label="Date (disabled)"
+      v-model="date"
+      disabled
+    />
     <ScbdDateRangeInput
       label="Date"
       v-model:start-date="date"
       v-model:end-date="date"
+    />
+    <ScbdDateRangeInput
+      label="Date (disabled)"
+      v-model:start-date="date"
+      v-model:end-date="date"
+      disabled
     />
     <ScbdDatetimeInput
       label="Datetime"
       v-model="datetime"
       :timezone="timezone"
     />
+    <ScbdDatetimeInput
+      label="Datetime (disabled)"
+      v-model="datetime"
+      :timezone="timezone"
+      disabled
+    />
     <ScbdDatetimeRangeInput
       label="Datetime"
       v-model:start-date="datetime"
       v-model:end-date="datetime"
       :timezone="timezone"
+    />
+    <ScbdDatetimeRangeInput
+      label="Datetime (disabled)"
+      v-model:start-date="datetime"
+      v-model:end-date="datetime"
+      :timezone="timezone"
+      disabled
     />
   </div>
 </template>

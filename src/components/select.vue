@@ -48,15 +48,15 @@
           <slot
             name="tag"
             :option="option"
-            :remove="remove"
+            :remove="disabled ? () => {} : remove"
           >
             <span>{{ option.label }}</span>
             <span style="padding: 6px">
               <i
                 aria-hidden="true"
-                tabindex="1"
+                :tabindex="disabled ? -1 : 1"
                 class="multiselect__tag-icon"
-                @click="remove(option)"
+                @click="!disabled && remove(option)"
               />
             </span>
           </slot>
@@ -65,7 +65,7 @@
 
       <template #clear>
         <div
-          v-if="selectedOptions.length"
+          v-if="selectedOptions.length && !disabled"
           @mousedown.prevent.stop="selectedOptions = []"
         >
           <div class="multiselect__clear">

@@ -27,4 +27,16 @@ describe('DateInput', () => {
 
     expect(modelValue).toBe('2025-06-15')
   })
+
+  it('disables the date input when disabled', async () => {
+    render(DateInput, {
+      props: {
+        label: 'Date',
+        modelValue: '2000-01-01',
+        disabled: true,
+      },
+    })
+
+    await expect.element(page.getByPlaceholder('Select date')).toBeDisabled()
+  })
 })

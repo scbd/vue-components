@@ -95,6 +95,13 @@ const nullRef = ref();
           {{ values.length }} foos
         </template>
       </Select>
+      <Select
+        :options="options"
+        v-model="selectedOption"
+        placeholder="Disabled select"
+        label="Single Select (disabled)"
+        disabled
+      />
     </div>
 
     <h2>Multi Language Input</h2>
@@ -182,6 +189,11 @@ const nullRef = ref();
       v-model="date"
     />
     <DateInput
+      label="Date (disabled)"
+      v-model="date"
+      disabled
+    />
+    <DateInput
       label="Date"
       v-model="date"
       :valid="true"
@@ -201,10 +213,22 @@ const nullRef = ref();
       v-model:start-date="date"
       v-model:end-date="date"
     />
+    <DateRangeInput
+      label="Date (disabled)"
+      v-model:start-date="date"
+      v-model:end-date="date"
+      disabled
+    />
     <DatetimeInput
       label="Datetime"
       v-model="datetime"
       :timezone="timezone"
+    />
+    <DatetimeInput
+      label="Datetime (disabled)"
+      v-model="datetime"
+      :timezone="timezone"
+      disabled
     />
     <DatetimeInput
       label="Datetime"
@@ -234,6 +258,13 @@ const nullRef = ref();
       v-model:start-date="datetime"
       v-model:end-date="datetime"
       :timezone="timezone"
+    />
+    <DatetimeRangeInput
+      label="Datetime (disabled)"
+      v-model:start-date="datetime"
+      v-model:end-date="datetime"
+      :timezone="timezone"
+      disabled
     />
 
   </div>

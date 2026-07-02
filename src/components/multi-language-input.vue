@@ -112,6 +112,8 @@ const someInvalid = computed(() => typeof (props.invalid) === "boolean"
   : props.invalid && Object.values(props.invalid).some((v) => v === true))
 
 const modelUpdated = (locale: Locale, value: string) => {
+  if (props.disabled) return;
+
   if (modifiers.trim) {
     value = value.trim();
   }
