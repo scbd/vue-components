@@ -24,6 +24,7 @@
               @update:modelValue="modelUpdated(lang.locale, $event)"
               :valid="isValid[lang.locale] || !expanded && someValid"
               :invalid="isInvalid[lang.locale] || !expanded && someInvalid"
+              :disabled="disabled"
             />
             <CFormInput
               v-else
@@ -34,6 +35,7 @@
               @update:modelValue="modelUpdated(lang.locale, $event)"
               :valid="isValid[lang.locale] || !expanded && someValid"
               :invalid="isInvalid[lang.locale] || !expanded && someInvalid"
+              :disabled="disabled"
             />
             <CInputGroupText
               v-if="index == 0"
@@ -76,6 +78,7 @@ const props = withDefaults(defineProps<{
   label?: string,
   multiple?: boolean,
   rows?: number,
+  disabled?: boolean,
   valid?: boolean | { [Locale: string]: boolean },
   invalid?: boolean | { [Locale: string]: boolean },
   feedbackValid?: string,
@@ -109,6 +112,8 @@ const someInvalid = computed(() => typeof (props.invalid) === "boolean"
   : props.invalid && Object.values(props.invalid).some((v) => v === true))
 
 const modelUpdated = (locale: Locale, value: string) => {
+  if (props.disabled) return;
+
   if (modifiers.trim) {
     value = value.trim();
   }
